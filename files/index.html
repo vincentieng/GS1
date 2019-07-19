@@ -44,11 +44,31 @@ input {width: 100%;}
 <table>
 <tr class="elementString"><td class="label">Example of Link</td><td><input class="elementString" type="text" v-model="elementStringInput"></td><td class="demobutton"><input class="elementString" type="button" value="Generate Example" @click="demo1"></td></tr>
 
+<!--
+
+<h1 style="font-size: 20px">Please fill this little form so you can create your account</h1>
+	<form id="signUp"class="form-signUp" action="/createAccount" method="post" >
+
+		<input type="password" name ="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+
+
+		<p style="text-align:center; margin-top : 50px">Vincent TIENG & Julie Falcou</p>
+	</form>
+-->
 <h2>Compress GS1 Digital Link</h2>
 <table>
-<tr class="digitalLink"><td class="label">Input: Uncompressed GS1 Digital Link URI</td><td>
-	<form action="/compression" method="get">
-	<input id="uncompressedDigitalLinkInput" class="digitalLink" type="text" v-model="uncompressedDigitalLinkInput"></td><td class="charCount">{{uncompressedDigitalLinkInput.length}}</td></tr>
+	<tr class="digitalLink"><td class="label">Input: Uncompressed GS1 Digital Link URI</td><td>
+<!--
+		<form  id="signUp" class="form-signUp" action="/decompression" method="post" >
+
+			<input id="uncompressedDigitalLinkInput" class="digitalLink" type="text" v-model="uncompressedDigitalLinkInput"></td><td class="charCount" name="compression">{{uncompressedDigitalLinkInput.length}}</td>
+
+			<button type="submit" form="signUp" style="margin-top:30px"
+			class="btn btn-lg btn-primary btn-block" value="Compressed" >Compressed</button>
+
+		</form>
+-->
+	</tr>
 <tr class="compressedDigitalLink"><td class="label">Output: Compressed GS1 Digital Link URI</td><td><input id="compressedDigitalLink" class="compressedDigitalLink" type="text" v-model="compressedDigitalLink"></td><td class="charCount">{{compressedDigitalLink.length}}</td></tr>
 <tr class="options">
 	<td class="label">Options</td>
@@ -59,15 +79,29 @@ input {width: 100%;}
 &nbsp;<br/>
 <hr/>
 &nbsp;<br/>
+
 <h2>Decompress GS1 Digital Link</h2>
 <table>
-<tr class="compressedDigitalLink"><td class="label">Input: Compressed GS1 Digital Link URI</td><td><input id="compressedDigitalLinkInput2" class="compressedDigitalLink" type="text" v-model="compressedDigitalLinkInput2"></td><td class="charCount">{{compressedDigitalLinkInput2.length}}</td></tr>
+<tr class="compressedDigitalLink"><td class="label">Input: Compressed GS1 Digital Link URI</td><td>
+	<form  id="signUp" class="form-signUp" action="/decompression" method="post" >
+
+		<input id="compressedDigitalLinkInput2" class="compressedDigitalLink" type="text" v-model="compressedDigitalLinkInput2" name="decompression"></td>
+
+		<td class="charCount">{{compressedDigitalLinkInput2.length}}</td>
+
+		<button type="submit" form="signUp" style="margin-top:30px"
+		class="btn btn-lg btn-primary btn-block" value="Unompressed" >Uncompressed</button>
+
+	</form>
+
+</tr>
 <tr class="digitalLink"><td class="label">Output: Uncompressed GS1 Digital Link URI</td><td><input id="uncompressedDigitalLinkOutput" class="digitalLink" type="text" v-model="uncompressedDigitalLinkOutput"></td><td class="charCount">{{uncompressedDigitalLinkOutput.length}}</td></tr>
 <tr class="structuredArray"><td class="label">Output: Structured Array</td><td colspan="2"><textArea class="structuredArrayOutput" class="digitalLink" v-model="structuredArrayOutput"></td></tr>
 <tr class="errorMessage" v-show="error4 !== ''"><td class="label">Error:</td><td colspan="2"><textarea class="errorMessage" v-model="error4"></textarea></td></tr>
 </table>
 
 </div>
+
 
 <script type="text/javascript">
 class GS1DigitalLinkToolkit {
@@ -1875,7 +1909,7 @@ class GS1DigitalLinkToolkit {
 		}
 
 
-		decompressGS1DigitalLink(compressedDigitalLinkURI,useShortText,uriStem) {
+		/*decompressGS1DigitalLink(compressedDigitalLinkURI,useShortText,uriStem) {
 				let extracted = this.extractFromCompressedGS1digitalLink(compressedDigitalLinkURI);
 				let gs1AIarray = extracted.GS1;
 				let otherArray = extracted.other;
@@ -1883,7 +1917,7 @@ class GS1DigitalLinkToolkit {
 				let uncompressedDL = this.buildGS1digitalLink(gs1AIarray,useShortText,uriStem,otherArray);
 				// return uncompressedDL;
 				return uncompressedDL;
-		}
+		}*/
 
 		decompressGS1DigitalLinkToStructuredArray(compressedDigitalLinkURI) {
 				let extracted = this.extractFromCompressedGS1digitalLink(compressedDigitalLinkURI);
@@ -1893,7 +1927,7 @@ class GS1DigitalLinkToolkit {
 				return structuredArray;
 		}
 
-/*
+
 		compressGS1DigitalLink(digitalLinkURI,useShortText,uriStem,uncompressedPrimary,useOptimisations,compressOtherKeyValuePairs) {
 				// extract query string
 				let firstQuestionMark = digitalLinkURI.indexOf("?");
@@ -1926,7 +1960,7 @@ class GS1DigitalLinkToolkit {
 				return compressedDL;
 		}
 
-*/
+
 		gs1ElementStringsToCompressedGS1DigitalLink(elementString,useShortText,uriStem,uncompressedPrimary,useOptimisations) {
 				let gs1AIarray=this.extractFromGS1elementStrings(elementString);
 				let separated=this.separateIDnonID(gs1AIarray);
@@ -2036,6 +2070,7 @@ var gs1dlt = new GS1DigitalLinkToolkit();
 				return "";
 				}
 			},
+
 			compressedDigitalLinkOutput : function() {
 				if (this.elementStringInput !== "") {
 					try {
@@ -2050,6 +2085,7 @@ var gs1dlt = new GS1DigitalLinkToolkit();
 				return "";
 				}
 			},
+
 			elementStringOutput : function() {
 				if (this.digitalLinkInput !== "") {
 					try {
@@ -2078,7 +2114,7 @@ var gs1dlt = new GS1DigitalLinkToolkit();
 
 
 			},
-			/*
+/*
 			compressedDigitalLink : function() {
 				if (this.uncompressedDigitalLinkInput !== "") {
 					try {
