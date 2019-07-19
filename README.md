@@ -357,3 +357,4 @@ Apache-2.0 licence
 
 # GS1
 # GS1
+# GS1DigitalLink
