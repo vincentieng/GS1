@@ -4,11 +4,9 @@ module.exports = {
   decompressGS1DigitalLink: function(compressedDigitalLinkURI) {
     var useShortText="";
       gs1 = new gs.gsclass();
-      gs1.myfunction();
       let extracted = gs1.extractFromCompressedGS1digitalLink(compressedDigitalLinkURI);
       let gs1AIarray = extracted.GS1;
       let otherArray = extracted.other;
-      console.log("OK");
       let uriStem="http://example.org";
 
       // TODO do something with otherArray to add it to the URI query string

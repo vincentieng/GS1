@@ -13,10 +13,7 @@ module.exports = {
       try {
         this.error3="";
         gs1 = new gs.gsclass();
-        return((gs1.compressGS1DigitalLink(uncompressedDigitalLinkInput,shortnames,uristem,uncompressedPrimary, useOptimisations, compressOtherKeyValuePairs))); 
-        /*if((gs1.compressGS1DigitalLink(this.uncompressedDigitalLinkInput,(this.shortnames =="true"),this.uristem,(this.uncompressedPrimary=="true"),(this.useOptimisations=="true"),(this.compressOtherKeyValuePairs=="true"))) !== "")*/
-
-
+        return((gs1.compressGS1DigitalLink(uncompressedDigitalLinkInput,shortnames,uristem,uncompressedPrimary, useOptimisations, compressOtherKeyValuePairs)));
       } catch(err) {
         this.error3=err+"\n"+err.stack;
         return "";
